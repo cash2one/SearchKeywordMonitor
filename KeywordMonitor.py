@@ -65,6 +65,7 @@ class PageVisit:
 
     def visit(self, url, useproxy=False):
         #proxy = {'http':'111.161.126.84:80'}
+        #默认使用3个优质代理IP，开启代理选项，则使用proxys.txt中的代理IP
         if not useproxy:
             proxys = ['111.161.126.88:8080', '111.161.126.91:8080', '111.161.126.92:8080']
         else:
@@ -275,7 +276,7 @@ def main():
     sg = SearchGet(pv, dg)
     cm = ClassMove(pv)
     pg = PlatformGet()
-    dp = DataParse()
+    #dp = DataParse()
     #连接数据库
     sc.connects(host="localhost", user="root", passwd="123456", db="keywordmonitor", charset="utf8")
     #获取当天未更新关键词
@@ -298,7 +299,7 @@ def main():
     #获取平台
     pg.getplatform(sc)
     sc.commitsql()
-    #获取目标数据
+    #获取目标数据，现有的DataParse以及创建的searchresult表都可以删掉
     #dp.parsedata(sc)
     #sc.commitsql()
     sc.closeconn()
